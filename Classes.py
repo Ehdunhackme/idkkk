@@ -2,18 +2,6 @@ import time
 import pymongo
 from hashlib import md5
 from termcolor import cprint
-from ursina import Entity, color, Vec3, Animation
-
-
-class Card(Entity):
-    def __init__(self, **kwargs):
-        super().__init__(model="quad")
-
-        self.color = color.gray
-        self.scale = Vec3(6.5, 9, 1)
-
-        for attr, value in kwargs.items():
-            setattr(self, attr, value)
 
 
 class MongoDB:
@@ -22,7 +10,7 @@ class MongoDB:
     COLLECTION = None
     client = None
 
-    def __init__(self, database, collection, host = ""):
+    def __init__(self, database, collection, host=""):
         if host != "":
             self.HOST = host
 
@@ -102,21 +90,12 @@ def organise_elements(elements: list, objPerLine: int, printMessages: bool = Tru
 
 
 def print_colored_list(items: list, color: str, attrs: list = []):
+    if not items:
+        cprint("None", color=color, attrs=attrs)
     for i in items:
         cprint(i, color=color, attrs=attrs)
 
 
-def play_animation(name, fps, loop, autoplay, scale, position, to_disable):
-    hide_entities(to_disable)
-    animation = Animation(name, fps=fps, loop=loop, autoplay=autoplay, scale=scale, position=position)
-    animation.sequence.auto_destroy = True
+def print_end_none(string: str):
+    print(string, end="")
 
-
-def hide_entities(entities: list):
-    for i in entities:
-        i.enabled = False
-
-
-def show_entities(entities: list):
-    for i in entities:
-        i.enabled = True
