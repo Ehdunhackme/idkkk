@@ -3,6 +3,16 @@ from immutables import *
 os.system("")  # Making terminal understand ANSI sequences
 
 
+def run_spelling_checker(word: str, elements_list: list):
+    correct_word = spell(word)
+    if correct_word in elements_list:
+        print_end_none("Do you mean ")
+        cprint(correct_word, "yellow", end="")
+        print("?")
+    else:
+        return None
+
+
 def addPoints():
     points = 30 / (_iter + 1)
     cprint("Yes that's correct! You got " + str(points) + " points", "green")
@@ -78,6 +88,7 @@ if __name__ == "__main__":
                 print("Sorry that's not in the selectable elements. Please try again...")
                 _iter -= 1
                 retry = True
+                run_spelling_checker(choice_of_element.capitalize(), elements_white)
             else:
                 print_end_none("Sorry that's wrong. Try again :'(")
         except Exception as e:

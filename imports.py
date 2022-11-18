@@ -6,6 +6,7 @@ from termcolor import *
 from copy import copy
 from bson.objectid import ObjectId
 from random import randint
+from autocorrect import Speller
 
 import os
 import json

@@ -6,6 +6,7 @@ login_prompts_yes = ["y", "yes", "ye", "ys", "1", "true", "es", "s"]
 mongo = MongoDB("kpkad", "users")
 logged_in = False
 user_info = {}
+spell = Speller()
 
 with open("elements.json") as f:
     contents = f.read()
